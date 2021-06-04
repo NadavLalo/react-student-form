@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
-import StudentForm from './StudentForm';
+import StudentForm from './AddStudentForm';
 
 const AddStudentModal = ({ show, onToggle, onAddStudent }) => {
   const [studentAdded, setStudentAdded] = useState(false);
@@ -23,8 +23,8 @@ const AddStudentModal = ({ show, onToggle, onAddStudent }) => {
           <span aria-hidden='true'>×</span>
         </button>
         {!studentAdded && (
-          <div>
-            <h3 className='text-center'>Student Details</h3>
+          <div className='text-center'>
+            <h2>Student Details</h2>
             <p>Greetings, Student! Please fill in your details</p>
           </div>
         )}

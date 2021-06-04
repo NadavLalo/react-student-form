@@ -11,7 +11,7 @@ const validations = {
   },
   address: {
     required: true,
-    pattern: '[a-zA-Z" "]{10,}',
+    pattern: '[a-zA-Z" "0-9]{10,}',
     patternMessage: 'At least 10 characters',
   },
   course: {

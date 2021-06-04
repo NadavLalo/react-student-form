@@ -16,7 +16,7 @@ import ErrorMessage from './ErrorMessage';
 import validations from '../../utils/validations';
 
 
-function StudentForm({ onStudentAdd }) {
+function AddStudentForm({ onStudentAdd }) {
   const [formIsValid, setFormIsValid] = useState(false);
   const [studentData, setStudentData] = useState({
     username: {
@@ -64,7 +64,7 @@ function StudentForm({ onStudentAdd }) {
   const validateInput = ({ target: { value, name } }) => {
     const newErrors = [];
     if (validations[name].required && !value) {
-      newErrors.push(`${name} is required`);
+      newErrors.push("Required");
     }
     if (!value.match(validations[name].pattern)) {
       newErrors.push(validations[name].patternMessage);
@@ -294,4 +294,4 @@ function StudentForm({ onStudentAdd }) {
     </Form>
   );
 }
-export default StudentForm;
+export default AddStudentForm;

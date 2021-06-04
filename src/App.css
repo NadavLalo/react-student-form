@@ -1,17 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Odibee+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Federo&family=Orbitron&display=swap');
+/* font-family: 'Federo', sans-serif;
+font-family: 'Orbitron', sans-serif; */
 body {
   background: #15245c;
   color: white;
-  font-family: 'Odibee Sans', cursive;
+  font-family: 'Federo', sans-serif;
   font-size: 1.5em;
   box-sizing: border-box;
   margin: 0;
 }
 
-h1 {
-  font-size: 3em;
-  margin-left: 1rem;
+h1, h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2em;
+
 }
 
 /* Bootstrap Fixes */

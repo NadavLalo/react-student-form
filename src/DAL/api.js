@@ -37,32 +37,32 @@ const studentsList = [
   },
 ];
 
+const savedStudents = JSON.parse(localStorage.getItem('students'));
+
+const studentsData = savedStudents || studentsList;
+
 const addStudent = newStudent => {
   newStudent.id = studentsList.length;
   newStudent.average = Math.floor(Math.random() * 45 + 56);
-  studentsList.push(newStudent);
+  studentsData.push(newStudent);
   localStorage.setItem('students', JSON.stringify(studentsList));
   return newStudent;
 };
 
 const sortStudentsAsc = sortBy => {
-  studentsList.sort((a, b) => {
+  studentsData.sort((a, b) => {
     return a[sortBy] > b[sortBy] ? 1 : a[sortBy] < b[sortBy] ? -1 : 0;
   });
-  console.log(studentsList)
-  return studentsList;
+  return studentsData;
 };
 
 const sortStudentsDesc = sortBy => {
-  studentsList.sort((a, b) => {
+  studentsData.sort((a, b) => {
     return a[sortBy] > b[sortBy] ? -1 : a[sortBy] < b[sortBy] ? 1 : 0;
   });
-  return studentsList;
+  return studentsData;
 };
 
-const savedStudents = JSON.parse(localStorage.getItem('students'));
-
-const studentsData = savedStudents || studentsList;
 export {
   studentsData as students,
   addStudent,

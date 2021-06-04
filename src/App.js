@@ -10,10 +10,10 @@ import {
 import { Container, Row, Col } from 'react-bootstrap';
 
 import StudentsList from './components/Students/StudentsList';
-import AddStudentModal from './components/StudentForm/StudentModal';
+import AddStudentModal from './components/StudentForm/AddStudentModal';
 import StudentDetailsModal from './components/Students/StudentDetailsModal';
-import './App.css';
 import NavbarComponent from './components/Students/Navbar';
+import './App.css';
 
 function App() {
   const [showAddStudent, setShowAddStudent] = useState(false);
