@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
+import { Button, Row, Col, Dropdown, Nav, Navbar } from 'react-bootstrap';
 
-import { students, addStudent } from './DAL/api';
+import StudentModal from '../StudentForm/StudentModal';
+import StudentDetailsModal from './StudentDetailsModal';
+import StudentsList from './StudentsList';
 
-import { Container, Row, Col } from 'react-bootstrap';
-
-import StudentsList from './components/Students/StudentsList';
-import AddStudentModal from './components/StudentForm/StudentModal';
-import StudentDetailsModal from './components/Students/StudentDetailsModal';
-import './App.css';
-import NavbarComponent from './components/Students/Navbar';
-
-function App() {
+function Students({ students, addStudent }) {
   const [showAddStudent, setShowAddStudent] = useState(false);
   const [showStudentDetails, setShowStudentDetails] = useState(false);
   const [studentsList, setStudentsList] = useState(students);
@@ -19,14 +14,13 @@ function App() {
   const [lastSort, setLastSort] = useState('');
 
   const showAddStudentHandler = () => setShowAddStudent(!showAddStudent);
-
   const showStudentDetailsHandler = () =>
     setShowStudentDetails(!showStudentDetails);
 
   const addStudentHandler = newStudent => {
     const newStudentsList = addStudent(newStudent);
     if (lastSort) {
-      sortStudentsHandler(lastSort, newStudentsList);
+      sortStudents(lastSort, newStudentsList);
     }
     setStudentsList(newStudentsList);
   };
@@ -36,27 +30,23 @@ function App() {
     showStudentDetailsHandler();
   };
 
-  const sortStudentsHandler = (sortBy, listToSort) => {
+  const sortStudents = (sortBy, listToSort) => {
     setLastSort(sortBy);
     listToSort.sort((a, b) => {
       if (a[sortBy] > b[sortBy]) {
-        return 1;
+        return 1
       } else if (a[sortBy] < b[sortBy]) {
-        return -1;
+        return -1
       } else {
-        return 0;
+        return 0
       }
     });
     setStudentsList([...listToSort]);
   };
+
   return (
-    <Container fluid>
-      <NavbarComponent
-        studentsList={studentsList}
-        onShowAddStudent={showAddStudentHandler}
-        onSortStudents={sortStudentsHandler}
-      />
-      <AddStudentModal
+    <>
+      <StudentModal
         show={showAddStudent}
         onToggle={showAddStudentHandler}
         onAddStudent={addStudentHandler}
@@ -77,8 +67,8 @@ function App() {
           />
         </Col>
       </Row>
-    </Container>
+    </>
   );
 }
 
-export default App;
+export default Students;
