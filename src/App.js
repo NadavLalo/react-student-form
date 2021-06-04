@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 
-import { students, addStudent } from './DAL/api';
+import {
+  students,
+  addStudent,
+  sortStudentsAsc,
+  sortStudentsDesc,
+} from './DAL/api';
 
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -16,7 +21,7 @@ function App() {
   const [studentsList, setStudentsList] = useState(students);
   const [selectedStudent, setSelectedStudent] = useState(null);
 
-  const [lastSort, setLastSort] = useState('');
+  const [lastSort, setLastSort] = useState(null);
 
   const showAddStudentHandler = () => setShowAddStudent(!showAddStudent);
 
@@ -24,11 +29,11 @@ function App() {
     setShowStudentDetails(!showStudentDetails);
 
   const addStudentHandler = newStudent => {
-    const newStudentsList = addStudent(newStudent);
+    const studentToAdd = addStudent(newStudent);
+    setStudentsList([...studentsList, studentToAdd]);
     if (lastSort) {
-      sortStudentsHandler(lastSort, newStudentsList);
+      sortStudentsHandler(lastSort.sortBy, lastSort.sortOrder);
     }
-    setStudentsList(newStudentsList);
   };
 
   const studentDetailsClickHandler = student => {
@@ -36,19 +41,15 @@ function App() {
     showStudentDetailsHandler();
   };
 
-  const sortStudentsHandler = (sortBy, listToSort) => {
-    setLastSort(sortBy);
-    listToSort.sort((a, b) => {
-      if (a[sortBy] > b[sortBy]) {
-        return 1;
-      } else if (a[sortBy] < b[sortBy]) {
-        return -1;
-      } else {
-        return 0;
-      }
-    });
-    setStudentsList([...listToSort]);
+  const sortStudentsHandler = (sortBy, sortOrder) => {
+    setLastSort({ sortBy, sortOrder });
+    if (sortOrder === 'desc') {
+      setStudentsList([...sortStudentsDesc(sortBy)]);
+      return;
+    }
+    setStudentsList([...sortStudentsAsc(sortBy)]);
   };
+
   return (
     <Container fluid>
       <NavbarComponent
@@ -70,10 +71,11 @@ function App() {
       />
 
       <Row>
-        <Col xs={8} md={10} className='mx-auto my-5'>
+        <Col xs={11} md={8} className='mx-auto my-5'>
           <StudentsList
             studentsList={studentsList}
             onStudentClick={studentDetailsClickHandler}
+            onSortStudents={sortStudentsHandler}
           />
         </Col>
       </Row>
