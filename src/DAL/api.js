@@ -42,10 +42,10 @@ const savedStudents = JSON.parse(localStorage.getItem('students'));
 const studentsData = savedStudents || studentsList;
 
 const addStudent = newStudent => {
-  newStudent.id = studentsList.length;
+  newStudent.id = studentsData.length;
   newStudent.average = Math.floor(Math.random() * 45 + 56);
   studentsData.push(newStudent);
-  localStorage.setItem('students', JSON.stringify(studentsList));
+  localStorage.setItem('students', JSON.stringify(studentsData));
   return newStudent;
 };
 
